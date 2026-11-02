@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luna Phase Agents — Mint (BSC)</title>
+<meta name="description" content="Luna Phase Agents (LPHASE) — 7,777 moon-phase Agents on BNB Smart Chain. First 3 per wallet free for Binance Agent ID holders, every extra 0.00005 BNB (~$0.035) in the same mint. The art lives inside the contract. Live on mainnet — 177 minted, all free so far.">
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: linear-gradient(180deg, #070a13 0%, #0a0e1a 60%, #0b1020 100%); color: #e8e6d8; margin: 0; padding: 28px 16px 40px; text-align: center; }
+  .card { max-width: 640px; margin: 0 auto 20px; background: #121828; border: 1px solid #2a3550; border-radius: 18px; padding: 28px 24px; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  .eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8a94b8; margin: 0 0 10px; }
+  .live { display: inline-flex; align-items: center; gap: 8px; background: #0e2a18; border: 1px solid #2f7a4d; color: #a9e8c4; border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; margin-bottom: 18px; }
+  .live .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+  svg.hero { width: 100%; max-width: 300px; border-radius: 14px; }
+  h1 { margin: 16px 0 6px; letter-spacing: .05em; font-size: 30px; }
+  h2 { margin: 4px 0 10px; font-size: 20px; }
+  .sub { color: #aab4d4; margin: 0 0 16px; line-height: 1.6; }
+  .stats { display: flex; gap: 8px; justify-content: center; margin: 18px 0 12px; flex-wrap: wrap; }
+  .stat { background: #1a2338; border-radius: 12px; padding: 12px 14px; min-width: 108px; }
+  .stat b { display: block; font-size: 21px; color: #f2efdf; }
+  .stat span { font-size: 12px; color: #8a94b8; }
+  .bar { height: 8px; background: #1a2338; border-radius: 999px; overflow: hidden; margin: 6px 0 4px; }
+  .bar i { display: block; height: 100%; background: linear-gradient(90deg, #d8d2b8, #f2efdf); border-radius: 999px; }
+  .barlabel { font-size: 12px; color: #8a94b8; margin-bottom: 4px; }
+  .phases { display: flex; justify-content: space-between; gap: 4px; margin: 18px 0 6px; }
+  .phase { flex: 1; min-width: 0; }
+  .phase svg { width: 30px; height: 30px; }
+  .phase span { display: block; font-size: 9.5px; color: #8a94b8; line-height: 1.3; margin-top: 4px; }
+  .steps { text-align: left; margin: 14px 0; }
+  .steps p { margin: 10px 0; line-height: 1.6; color: #c9cddb; }
+  .steps b { color: #f2efdf; }
+  .result { background: #0f1424; border: 1px solid #3a4666; border-radius: 12px; padding: 14px; margin: 12px 0; text-align: left; font-size: 14px; line-height: 1.8; }
+  .result b { color: #d8d2b8; }
+  .result b.no { color: #ff9a9a; }
+  button { background: #d8d2b8; color: #0a0e1a; border: 0; border-radius: 12px; padding: 13px 24px; font-size: 16px; cursor: pointer; margin: 6px; font-weight: 650; }
+  button:disabled { background: #2a3550; color: #6b7694; cursor: not-allowed; }
+  button.ghost { background: transparent; border: 1px solid #d8d2b8; color: #d8d2b8; }
+  input[type=text] { width: 100%; max-width: 440px; padding: 13px; border-radius: 12px; border: 1px solid #3a4666; background: #1a2338; color: #fff; font-size: 15px; text-align: center; }
+  input[type=text]:focus { outline: none; border-color: #d8d2b8; }
+  textarea { width: 100%; height: 340px; background: #0f1424; color: #e6e0c8; border: 1px solid #3a4666; border-radius: 12px; padding: 14px; font-size: 13px; font-family: monospace; }
+  #status, #checkStatus, #mintStatus { margin-top: 14px; min-height: 20px; color: #aab4d4; word-break: break-all; }
+  .note { background: #1a2338; border-radius: 12px; padding: 14px; margin: 14px 0; font-size: 13.5px; color: #aab4d4; text-align: left; line-height: 1.65; }
+  .note b { color: #e8e6d8; }
+  .roadmap { text-align: left; margin: 12px 0; }
+  .roadmap div { padding: 9px 0; border-bottom: 1px solid #1e2740; font-size: 14.5px; color: #c9cddb; }
+  .roadmap div:last-child { border-bottom: 0; }
+  .roadmap .done { color: #4ade80; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-left: 8px; }
+  .roadmap .open { color: #e8c96a; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-left: 8px; }
+  code { background: #1a2338; padding: 2px 6px; border-radius: 6px; font-size: 13px; }
+  a { color: #d8d2b8; }
+  .footer { max-width: 640px; margin: 0 auto; font-size: 12.5px; color: #8a94b8; line-height: 1.8; text-align: center; }
+  .footer code { font-size: 12px; }
+  @media (max-width: 480px) { .card { padding: 22px 16px; } h1 { font-size: 25px; } .phase span { font-size: 8.5px; } }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="card">
+  <p class="eyebrow">Binance Agent ID &middot; BNB Smart Chain</p>
+  <div class="live"><span class="dot"></span> Live on mainnet &mdash; 177 of 7,777 minted</div>
+  <svg class="hero" viewBox="0 0 400 400" role="img" aria-label="Full Moon — Luna Phase Agents"><rect width="400" height="400" fill="#0a0e1a"/><circle cx="60" cy="50" r="2" fill="#ffffff"/><circle cx="330" cy="70" r="2" fill="#ffffff"/><circle cx="90" cy="320" r="2" fill="#ffffff"/><circle cx="340" cy="300" r="1.5" fill="#ffffff"/><circle cx="200" cy="180" r="110" fill="#e9e6d8"/><circle cx="200" cy="180" r="110" fill="none" stroke="#3a4666" stroke-width="2"/><text x="200" y="340" font-family="monospace" font-size="22" fill="#e9e6d8" text-anchor="middle">Full Moon</text><text x="200" y="368" font-family="monospace" font-size="14" fill="#8a94b8" text-anchor="middle">Luna Phase Agents &mdash; 100% lit</text></svg>
+  <h1>LUNA PHASE AGENTS</h1>
+  <p class="sub">7,777 moon-phase Agents on BNB Smart Chain. Your Agent ID is the key: the first 3 mints per wallet are free, and every extra mint in the same transaction costs 0.00005 BNB (about $0.035).</p>
+  <div class="stats">
+    <div class="stat"><b>7,777</b><span>Total supply</span></div>
+    <div class="stat"><b>7,000</b><span>Free</span></div>
+    <div class="stat"><b>777</b><span>Paid</span></div>
+    <div class="stat"><b>$0.035</b><span>Per extra mint</span></div>
+  </div>
+  <div class="bar"><i style="width:2.3%"></i></div>
+  <div class="barlabel">177 minted &middot; 6,823 free left &middot; 777 paid left</div>
+
+  <div class="phases">
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="12" cy="12" r="10" fill="#0a0e1a"/></svg><span>New Moon</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="9.5" cy="12" r="10" fill="#0a0e1a"/></svg><span>Waxing Crescent</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="5.4" cy="12" r="10" fill="#0a0e1a"/></svg><span>First Quarter</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="3.3" cy="12" r="10" fill="#0a0e1a"/></svg><span>Waxing Gibbous</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/></svg><span>Full Moon</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="20.7" cy="12" r="10" fill="#0a0e1a"/></svg><span>Waning Gibbous</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="18.6" cy="12" r="10" fill="#0a0e1a"/></svg><span>Last Quarter</span></div>
+    <div class="phase"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#e9e6d8" stroke="#3a4666"/><circle cx="14.5" cy="12" r="10" fill="#0a0e1a"/></svg><span>Waning Crescent</span></div>
+  </div>
+  <p class="sub" style="margin-bottom:0">Eight phases, one per token. Your token&rsquo;s phase is set by its number, so each phase appears about 972 times. The art lives inside the contract itself, so it can never be changed or taken down.</p>
+</div>
+
+<!-- ============ 1. CHECK ============ -->
+<div class="card">
+  <p class="eyebrow">Step 1</p>
+  <h2>Check your wallet</h2>
+  <p class="sub">Paste any wallet address. We only read the chain &mdash; nothing is signed, nothing is connected.</p>
+  <input type="text" id="addrInput" placeholder="0x&hellip; your wallet address" autocomplete="off" spellcheck="false">
+  <br><button id="checkBtn">Check my wallet</button>
+  <div id="checkStatus">Paste an address above to check its Agent ID status.</div>
+  <div class="result" id="checkResult" style="display:none">
+    Wallet: <code id="rAddr">&ndash;</code><br>
+    Binance Agent ID: <b id="rAgent">&ndash;</b><br>
+    Free mints already used: <b id="rUsed">&ndash;</b><br>
+    LPHASE held: <b id="rBalance">&ndash;</b><br>
+    <span id="rVerdict"></span>
+  </div>
+</div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<div class="card">
+  <p class="eyebrow">How minting works</p>
+  <h2>One mint, free first</h2>
+  <div class="steps">
+    <p><b>Agent ID required.</b> Every mint &mdash; free or paid &mdash; needs a Binance Agent ID on the wallet.</p>
+    <p><b>First 3 free, then $0.035 each.</b> The first 3 mints per wallet are free; every extra mint in the same transaction costs 0.00005 BNB (about $0.035). Minting 3 costs nothing, minting 5 costs 0.00010 BNB.</p>
+    <p><b>Max 50 per wallet.</b> Regular wallets only &mdash; smart-contract wallets can&rsquo;t mint.</p>
+  </div>
+  <div class="roadmap">
+    <div>Contract built and tested<span class="done">Done</span></div>
+    <div>Testnet trial<span class="done">Done</span></div>
+    <div>Mainnet launch &mdash; 2 Nov 2026<span class="done">Done</span></div>
+    <div>Open minting<span class="open">Live now</span></div>
+  </div>
+  <div class="note"><b>Good to know:</b> the contract is not audited by a third party. The owner can withdraw the BNB collected and hand over ownership, but cannot change the supply, the price, the free allowance, or the art &mdash; and cannot mint extra tokens, pause minting, or take anyone&rsquo;s tokens. Royalties are 5%. No floor price, no returns, and no token is promised.</div>
+</div>
+
+<!-- ============ 2. MINT WITH YOUR AGENT ============ -->
+<div class="card">
+  <p class="eyebrow">Step 2</p>
+  <h2>Mint with your own AI agent</h2>
+  <p class="sub">Copy this prompt and paste it into your AI agent. It checks everything first, shows you a preview, and waits for your OK before minting. No wallet connection needed here.</p>
+  <textarea id="agentPrompt" readonly></textarea><br>
+  <button id="copyPrompt">&#128203; Copy mint prompt</button>
+  <div id="copyStatus"></div>
+  <div class="note">Tip: if you checked an address above, the prompt is filled in with that address. Otherwise it says &ldquo;my wallet&rdquo; and your agent will use whichever wallet it controls. The full machine-readable spec is in <a href="llms.txt" target="_blank" rel="noopener">llms.txt</a>.</div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+  Contract (BSC mainnet): <code>0x5c04392641c81F1b69826E13d8f3F78c58464970</code> &mdash; <a href="https://bscscan.com/address/0x5c04392641c81F1b69826E13d8f3F78c58464970" target="_blank" rel="noopener">verified on BscScan</a><br>
+  Counts as of 2026-11-02 ~16:38 GMT: 177/7,777 (177 free, 0 paid)<br>
+  Luna Phase Agents &mdash; LPHASE
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.17.0/dist/ethers.umd.min.js"></script>
+<script>
+// --- LUNA PHASE AGENTS — LIVE ON MAINNET 2026-11-02.
+// Contract: 0x5c04392641c81F1b69826E13d8f3F78c58464970 ---
+// The checker reads the REAL Binance Agent ID registry on BSC mainnet
+// (chain 56) and the LIVE mainnet contract below.
+const REGISTRY_ADDRESS = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
+const CONTRACT_ADDRESS = "0x5c04392641c81F1b69826E13d8f3F78c58464970";
+const CHAIN_ID = 56; // BSC mainnet
+const RPC_URL = "https://bsc-dataseed.binance.org/";
+const REGISTRY_ABI = ["function balanceOf(address) view returns (uint256)"];
+const CONTRACT_ABI = [
+  "function freeClaimed(address) view returns (uint256)",
+  "function mintedCount(address) view returns (uint256)",
+  "function balanceOf(address) view returns (uint256)",
+  "function freeRemaining() view returns (uint256)",
+  "function paidRemaining() view returns (uint256)"
+];
+const $ = (id) => document.getElementById(id);
+const short = (a) => a ? a.slice(0, 6) + "…" + a.slice(-4) : "–";
+let checkedAddr = null;
+
+const rpc = new ethers.JsonRpcProvider(RPC_URL, CHAIN_ID);
+const readRegistry = new ethers.Contract(REGISTRY_ADDRESS, REGISTRY_ABI, rpc);
+const readContract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, rpc);
+
+function setStatus(el, html) { $(el).innerHTML = html; }
+
+// ---- The copy-paste agent prompt (filled with the checked address when known) ----
+function buildPrompt(addr) {
+  const who = addr ? addr : "my wallet";
+  const whoLine = addr
+    ? "Mint for wallet " + addr + " (check that this is the wallet your agent controls — if it controls a different wallet, mint for that one instead and check it first)."
+    : "Mint for my wallet (the wallet your agent controls).";
+  return "Mint Luna Phase Agents (LPHASE) for me on BNB Smart Chain.\n"
+    + whoLine + "\n\n"
+    + "STATUS: LIVE ON MAINNET. Contract 0x5c04392641c81F1b69826E13d8f3F78c58464970, verified on BscScan + Sourcify (exact_match). Minting is open.\n\n"
+    + "Specs: Name: Luna Phase Agents, symbol LPHASE. Total supply 7,777. Free supply 7,000 (90%), paid supply 777 (10%). SINGLE blended mint(qty): the first 3 mints per wallet are FREE, every extra mint in the SAME transaction costs exactly 0.00005 BNB (~$0.035). Max 50 per wallet total, max 50 per transaction. Examples: mint(3) = 0 BNB, mint(5) = 0.00010 BNB, mint(50) fresh wallet = 0.00235 BNB. There is NO separate freeMint() function and NO separate paid phase.\n"
+    + "Agent ID registry (BSC mainnet, real): 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F — check balanceOf(" + who + ") there; above 0 means it holds an Agent ID. Agent ID is REQUIRED for ALL mints, free and paid. Only regular wallets (EOAs) can mint — msg.sender must equal tx.origin, so a contract wallet cannot mint.\n\n"
+    + "CHECKS FIRST (read-only, via a public BSC RPC — do not skip these):\n"
+    + "- totalSupply(), freeMintedCount(), freeRemaining(), paidRemaining(), freeOpen(), paidOpen() on the deployed contract.\n"
+    + "- freeClaimed(" + who + ") — how many of the 3 free mints this wallet already used; mintedCount(" + who + ") — total minted, must stay at or under 50.\n"
+    + "- quoteMint(" + who + ", qty) — returns (freeQty, paidQty, cost). The exact BNB to send is cost = paidQty x 0.00005 BNB. Never guess the price.\n"
+    + "- registry balanceOf(" + who + ") — must be above 0.\n\n"
+    + "THEN MINT:\n"
+    + "- Call mint(qty) with value exactly equal to the quoteMint cost. If the wallet still has free mints left, the first ones in the tx are free.\n"
+    + "- If paidRemaining() is 0, only free mints are possible; if the wallet already used its 3 free mints, stop and tell me why — do not mint.\n"
+    + "- After minting, verify on-chain (totalSupply went up, ownerOf of the new token is my wallet, tokenURI decodes to a moon phase) and show me the transaction hash with a BscScan link.\n\n"
+    + "SAFETY: preview the contract call first and show me the parsed transaction, the exact value, and any risks. Wait for my explicit confirmation before executing. Never send more BNB than the quoteMint cost. Never mint more than 50 per wallet in total.\n"
+    + "Art: tokenURI is fully on-chain SVG (8 moon phases, phase = (tokenId-1) % 8). There is no setBaseURI and no off-chain metadata — do not set or expect a baseURI.";
+}
+function refreshPrompt() { $("agentPrompt").value = buildPrompt(checkedAddr); }
+refreshPrompt();
+
+$("copyPrompt").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText($("agentPrompt").value);
+    $("copyStatus").textContent = "✅ Copied — paste it into your AI agent.";
+  } catch (e) {
+    $("agentPrompt").select();
+    $("copyStatus").textContent = "Copy didn't work automatically — the prompt is selected, press Ctrl+C / Cmd+C.";
+  }
+};
+
+// ---- Step 1: paste-address checker (no wallet, read-only) ----
+$("checkBtn").onclick = async () => {
+  const raw = $("addrInput").value.trim();
+  if (!ethers.isAddress(raw)) {
+    setStatus("checkStatus", "That doesn't look like a wallet address. It should start with 0x and be 42 characters long.");
+    $("checkResult").style.display = "none";
+    return;
+  }
+  const addr = ethers.getAddress(raw);
+  checkedAddr = addr;
+  refreshPrompt();
+  setStatus("checkStatus", "Checking " + short(addr) + " on BSC mainnet…");
+  try {
+    const [agentBal, freeUsed, minted, held] = await Promise.all([
+      readRegistry.balanceOf(addr),
+      readContract.freeClaimed(addr),
+      readContract.mintedCount(addr),
+      readContract.balanceOf(addr)
+    ]);
+    const hasAgent = agentBal > 0n;
+    $("rAddr").textContent = addr;
+    $("rAgent").textContent = hasAgent ? "Yes ✓" : "No ✗";
+    $("rAgent").className = hasAgent ? "" : "no";
+    $("rUsed").textContent = freeUsed.toString() + " of 3 free used (" + minted.toString() + " minted total)";
+    $("rBalance").textContent = held.toString() + " LPHASE";
+    $("checkResult").style.display = "block";
+    let verdict;
+    if (hasAgent && freeUsed < 3n) verdict = "✅ This wallet holds a Binance Agent ID and still has " + (3n - freeUsed).toString() + " free mint(s) left — mint with the prompt below.";
+    else if (hasAgent) verdict = "✅ This wallet holds a Binance Agent ID but has used all 3 free mints — further mints cost 0.00005 BNB each (max 50 total).";
+    else verdict = "❌ This wallet has no Agent ID, so it cannot mint at all — Agent ID is required for free AND paid mints here.";
+    $("rVerdict").textContent = verdict;
+    setStatus("checkStatus", "Checked on-chain (mainnet registry + live contract). The prompt below now uses this address.");
+  } catch (e) {
+    setStatus("checkStatus", "Check failed — the BSC RPC is busy. Try again in a few seconds.");
+  }
+};
+$("addrInput").addEventListener("keydown", (e) => { if (e.key === "Enter") $("checkBtn").click(); });
+</script>
+</body>
+</html>

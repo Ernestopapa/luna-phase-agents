@@ -1,0 +1,81 @@
+# Luna Phase Agents (LPHASE) — instructions for AI agents
+
+STATUS: LIVE ON MAINNET. Contract 0x5c04392641c81F1b69826E13d8f3F78c58464970,
+verified on BscScan + Sourcify (exact_match, matchId 58099193). Minting
+is open. Counts as of 2026-11-02 ~16:38 GMT: 177/7,777 minted (177 free,
+0 paid, 6,823 free left, 777 paid left). First free mint landed within
+seconds of deploy; the contract was verified within ~2 minutes, and
+free mints are being claimed fast — all free so far, no paid yet.
+
+## What it is
+
+Luna Phase Agents (LPHASE) — 7,777 moon-phase Agents on BNB Smart Chain.
+First 3 per wallet FREE for Binance Agent ID holders, every extra mint
+in the SAME transaction 0.00005 BNB (~$0.035). Max 50 per wallet total,
+max 50 per transaction. Transferable ERC-721, NOT soulbound.
+Art is on-chain SVG: 8 moon phases, phase = (tokenId-1) % 8.
+New Moon 0%, Waxing Crescent 25%, First Quarter 50%, Waxing Gibbous 75%,
+Full Moon 100%, Waning Gibbous 75%, Last Quarter 50%, Waning Crescent 25%.
+
+## Contracts
+
+- Agent ID registry (BSC mainnet, real): 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
+- Luna Phase Agents contract (BSC MAINNET, live): 0x5c04392641c81F1b69826E13d8f3F78c58464970,
+  deployed 2026-11-02 ~16:17 GMT, deploy tx 0xacb62e088a9c3cb6449bb80f7f82565eec13224c0b5109ca1fbbff879f82c9ad,
+  gas 2,622,738, block 131271359. Sourcify exact_match (creation +
+  runtime), matchId 58099193. BscScan VERIFIED via Sourcify forwarding
+  (checkverifystatus "Pass - Verified", ContractName LunaPhaseAgents).
+  Deployer leftover 0.0008678131 BNB returned to the owner (tx
+  0x5daed63051d045065d406faea8db691988064271a29c0e14f752e297fd097faa).
+- Luna Phase Agents contract (BSC TESTNET, superseded test build):
+  0x92788043466352c8b878601702DA549579657bd2 — never mint from it.
+- Chain: BSC mainnet, chainId 56. Public RPC: https://bsc-dataseed.binance.org/
+
+## Mint rules (once deployed)
+
+- Single blended mint: mint(uint256 qty) payable. There is NO freeMint()
+  function and NO separate paid phase. freeOpen() and paidOpen() are
+  both true from deploy while their supplies remain.
+- Agent ID REQUIRED for ALL mints (free and paid):
+  registry balanceOf(wallet) must be > 0, or mint reverts "no Agent ID".
+- EOA-only: msg.sender must equal tx.origin. Contract wallets cannot mint.
+- Price: quoteMint(wallet, qty) returns (freeQty, paidQty, cost).
+  cost = paidQty * 0.00005 BNB. Send EXACTLY cost. Examples: mint(3) = 0
+  BNB, mint(5) fresh wallet = 0.00010 BNB, mint(50) fresh wallet =
+  0.00235 BNB.
+- Caps: freeClaimed(wallet) max 3; mintedCount(wallet) max 50;
+  totalSupply max 7,777; freeRemaining max 7,000; paidRemaining max 777.
+- Views: totalSupply(), freeMintedCount(), freeRemaining(),
+  paidRemaining(), freeOpen(), paidOpen(), freeClaimed(address),
+  mintedCount(address), freeMinted(address), phaseOf(tokenId),
+  phaseName(uint8), phaseIllumination(uint8), quoteMint(address, uint256),
+  tokenPaid(tokenId), royaltyInfo(uint256, uint256).
+- tokenURI(tokenId) returns a data:application/json;base64 URI with a
+  data:image/svg+xml;base64 image, generated on-chain. There is NO
+  setBaseURI and NO off-chain metadata. Do not set or expect a baseURI.
+
+## Owner powers (plain language)
+
+Owner: 0x75d251Ba39dED2E456d9f6DD776f77d422864403 (neongred.ai).
+Owner CAN: withdraw all BNB, transfer/renounce ownership.
+Owner CANNOT: change supply (7,777), free supply (7,000), price
+(0.00005 BNB), free-per-wallet (3), max per wallet (50), the Agent ID
+registry, or the art; cannot mint extra tokens, pause, freeze, burn,
+or take holders' tokens.
+Royalties: 5% ERC-2981 to the owner. Some marketplaces ignore ERC-2981.
+Contract is NOT audited by a third party.
+
+## Safety (for the minting agent)
+
+- Read the checks first: totalSupply, freeRemaining, paidRemaining,
+  freeClaimed(wallet), mintedCount(wallet), quoteMint(wallet, qty),
+  registry balanceOf(wallet).
+- Preview the mint call first: show the parsed transaction, the exact
+  value, and any risks. Wait for the user's explicit confirmation
+  before executing.
+- Never send more BNB than the quoteMint cost. Never mint more than
+  50 per wallet in total.
+- After minting, verify on-chain (totalSupply went up, ownerOf of the
+  new token is the wallet, tokenURI decodes to a moon phase) and show
+  the transaction hash with a BscScan link.
+- No floor price, returns, APY, token or airdrop is promised.
