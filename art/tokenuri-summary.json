@@ -1,0 +1,82 @@
+[
+  {
+    "tokenId": 1,
+    "phase": "New Moon",
+    "phaseIndex": 0,
+    "illumination": "0%",
+    "origin": "Free",
+    "svgSha256": "deffc474b4f9efdb0172104b28fa77996b863dc76995227892828594684e119f",
+    "jsonSha256": "5c0516e49167f53bea7eac712cba1c99352e370b66e5eecaac973a504d7dd6da",
+    "svgBytes": 756
+  },
+  {
+    "tokenId": 2,
+    "phase": "Waxing Crescent",
+    "phaseIndex": 1,
+    "illumination": "25%",
+    "origin": "Free",
+    "svgSha256": "26af149b55e8798224ac5cbe1836b0101034141cdd3aefc002d9755cce832e06",
+    "jsonSha256": "dfbc192596b1b342090455275e19ccc93da1aa3f09dddcda798cce7cea1b8ce0",
+    "svgBytes": 764
+  },
+  {
+    "tokenId": 3,
+    "phase": "First Quarter",
+    "phaseIndex": 2,
+    "illumination": "50%",
+    "origin": "Free",
+    "svgSha256": "08e648f93918dd44b51ee299d9b4db9c632150bf6af05a40e51b29352347f405",
+    "jsonSha256": "e4648bb791ae8d55e14b956e6b21d07717ff38182dd6bb6d611620fed5f628f0",
+    "svgBytes": 761
+  },
+  {
+    "tokenId": 4,
+    "phase": "Waxing Gibbous",
+    "phaseIndex": 3,
+    "illumination": "75%",
+    "origin": "Paid",
+    "svgSha256": "0804c4ecd83072dca134cd29d93256aa726302953d66ff1dce10ca09cd66084d",
+    "jsonSha256": "3fe5d9530bd55f1d9c4cf9db8a39a839afe18fc86b323007cf0691a3a5f63131",
+    "svgBytes": 762
+  },
+  {
+    "tokenId": 5,
+    "phase": "Full Moon",
+    "phaseIndex": 4,
+    "illumination": "100%",
+    "origin": "Paid",
+    "svgSha256": "706b6ea95036b272c654a71f1442d4075bf9e27d1abb0b374bd7591a2e5df598",
+    "jsonSha256": "647f56021334664926fbc8c748618eb549da06322bad0cadda0ff43b500bc9ed",
+    "svgBytes": 761
+  },
+  {
+    "tokenId": 6,
+    "phase": "Waning Gibbous",
+    "phaseIndex": 5,
+    "illumination": "75%",
+    "origin": "Paid",
+    "svgSha256": "2a6b53d60d521ab84f94e3564503a315c40310854b8f86374de74482a8438baa",
+    "jsonSha256": "f090c036f3a7f423fb4573e9a45020ce86699e2efae9b9ee8f51ca3da55e74b7",
+    "svgBytes": 763
+  },
+  {
+    "tokenId": 7,
+    "phase": "Last Quarter",
+    "phaseIndex": 6,
+    "illumination": "50%",
+    "origin": "Paid",
+    "svgSha256": "6903d415bc41df2bcca5c7f93d5340c53a23c9cdeb74c52c5a69b80781bef6b9",
+    "jsonSha256": "6aa22bed30bfa5fecbb2799ae8b26765785735e934b9e3d3e8b0cafffb1b5786",
+    "svgBytes": 761
+  },
+  {
+    "tokenId": 8,
+    "phase": "Waning Crescent",
+    "phaseIndex": 7,
+    "illumination": "25%",
+    "origin": "Paid",
+    "svgSha256": "134018416bd4e6ec17b9b336786fd84d12e491d811029ed8c8ba1b5306cdcdf9",
+    "jsonSha256": "6140b918df11a144fa2fb4945a176fdde7d16419de57225b53565df91c536612",
+    "svgBytes": 764
+  }
+]

@@ -1,0 +1,460 @@
+{
+  "files_summary": {
+    "total_source_units": 3,
+    "total_sloc": 220
+  },
+  "files_details": {
+    "files_details": [
+      {
+        "file_path": "contracts/AgentIdRegistryMock.sol",
+        "n_sloc": 17
+      },
+      {
+        "file_path": "contracts/EoaTestCaller.sol",
+        "n_sloc": 9
+      },
+      {
+        "file_path": "contracts/LunaPhaseAgents.sol",
+        "n_sloc": 194
+      }
+    ]
+  },
+  "issue_count": {
+    "high": 3,
+    "low": 8
+  },
+  "high_issues": {
+    "issues": [
+      {
+        "title": "`abi.encodePacked()` Hash Collision",
+        "description": "abi.encodePacked() should not be used with dynamic types when passing the result to a hash function such as `keccak256()`. Use `abi.encode()` instead which will pad items to 32 bytes, preventing hash collisions: https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#non-standard-packed-mode. (e.g. `abi.encodePacked(0x123,0x456)` => `0x123456` => `abi.encodePacked(0x1,0x23456)`, but `abi.encode(0x123,0x456)` => `0x0...1230...456`). Unless there is a compelling reason, `abi.encode` should be preferred. If there is only one argument to `abi.encodePacked()` it can often be cast to `bytes()` or `bytes32()` instead: https://ethereum.stackexchange.com/questions/30912/how-to-compare-strings-in-solidity#answer-82739. If all arguments are strings and or bytes, `bytes.concat()` should be used instead.",
+        "detector_name": "abi-encode-packed-hash-collision",
+        "instances": [
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 206,
+            "src": "9004:16",
+            "src_char": "9000:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 209,
+            "src": "9164:16",
+            "src_char": "9160:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 219,
+            "src": "9808:16",
+            "src_char": "9804:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 230,
+            "src": "10417:16",
+            "src_char": "10413:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 235,
+            "src": "10611:16",
+            "src_char": "10607:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 240,
+            "src": "10851:16",
+            "src_char": "10847:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 247,
+            "src": "11355:16",
+            "src_char": "11351:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 255,
+            "src": "11817:16",
+            "src_char": "11813:16"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 256,
+            "src": "11866:16",
+            "src_char": "11862:16"
+          }
+        ]
+      },
+      {
+        "title": "ETH transferred without address checks",
+        "description": "Consider introducing checks for `msg.sender` to ensure the recipient of the money is as intended.",
+        "detector_name": "eth-send-unchecked-address",
+        "instances": [
+          {
+            "contract_path": "contracts/EoaTestCaller.sol",
+            "line_no": 10,
+            "src": "412:7",
+            "src_char": "410:7"
+          }
+        ]
+      },
+      {
+        "title": "Reentrancy: State change after external call",
+        "description": "Changing state after an external call can lead to re-entrancy attacks.Use the checks-effects-interactions pattern to avoid this issue.",
+        "detector_name": "reentrancy-state-change",
+        "instances": [
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 169,
+            "src": "7217:65",
+            "src_char": "7213:65",
+            "hint": "State is changed at: `freeClaimed[msg.sender] += freeQty`, `_freeCount += freeQty`, `paidMinted += paidQty`, `mintedCount[msg.sender] += qty`, `uint256 tokenId = _nextId++`, `tokenPaid[tokenId] = isPaid`"
+          }
+        ]
+      }
+    ]
+  },
+  "low_issues": {
+    "issues": [
+      {
+        "title": "Centralization Risk",
+        "description": "Contracts have owners with privileged rights to perform admin tasks and need to be trusted to not perform malicious updates or drain funds.",
+        "detector_name": "centralization-risk",
+        "instances": [
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 12,
+            "src": "550:7",
+            "src_char": "546:7"
+          },
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 17,
+            "src": "729:9",
+            "src_char": "725:9"
+          },
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 21,
+            "src": "853:9",
+            "src_char": "849:9"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 43,
+            "src": "2431:7",
+            "src_char": "2427:7"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 269,
+            "src": "12539:9",
+            "src_char": "12535:9"
+          }
+        ]
+      },
+      {
+        "title": "Costly operations inside loop",
+        "description": "Invoking `SSTORE` operations in loops may waste gas. Use a local variable to hold the loop computation result.",
+        "detector_name": "costly-loop",
+        "instances": [
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 22,
+            "src": "873:97",
+            "src_char": "869:97"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 183,
+            "src": "7874:265",
+            "src_char": "7870:265"
+          }
+        ]
+      },
+      {
+        "title": "Literal Instead of Constant",
+        "description": "Define and use `constant` variables instead of using literals. If the same constant literal value is used multiple times, create a constant state variable and reference it throughout the contract.",
+        "detector_name": "literal-instead-of-constant",
+        "instances": [
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 131,
+            "src": "5613:1",
+            "src_char": "5609:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 132,
+            "src": "5662:1",
+            "src_char": "5658:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 133,
+            "src": "5706:1",
+            "src_char": "5702:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 134,
+            "src": "5755:1",
+            "src_char": "5751:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 140,
+            "src": "5953:1",
+            "src_char": "5949:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 141,
+            "src": "6003:1",
+            "src_char": "5999:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 142,
+            "src": "6038:1",
+            "src_char": "6034:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 142,
+            "src": "6052:1",
+            "src_char": "6048:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 197,
+            "src": "8525:1",
+            "src_char": "8521:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 198,
+            "src": "8596:1",
+            "src_char": "8592:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 199,
+            "src": "8658:1",
+            "src_char": "8654:1"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 200,
+            "src": "8731:1",
+            "src_char": "8727:1"
+          }
+        ]
+      },
+      {
+        "title": "PUSH0 Opcode",
+        "description": "Solc compiler version 0.8.20 switches the default target EVM version to Shanghai, which means that the generated bytecode will include PUSH0 opcodes. Be sure to select the appropriate EVM version in case you intend to deploy on a chain other than mainnet like L2 chains that may not support PUSH0, otherwise deployment of your contracts will fail.",
+        "detector_name": "push-zero-opcode",
+        "instances": [
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          },
+          {
+            "contract_path": "contracts/EoaTestCaller.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          }
+        ]
+      },
+      {
+        "title": "Loop Contains `require`/`revert`",
+        "description": "Avoid `require` / `revert` statements in a loop because a single bad item can cause the whole transaction to fail. It's better to forgive on fail and return failed elements post processing of the loop",
+        "detector_name": "require-revert-in-loop",
+        "instances": [
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 183,
+            "src": "7908:231",
+            "src_char": "7904:231"
+          }
+        ]
+      },
+      {
+        "title": "State Change Without Event",
+        "description": "There are state variable changes in this function but no event is emitted. Consider emitting an event to enable offchain indexers to track the changes.",
+        "detector_name": "state-change-without-event",
+        "instances": [
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 17,
+            "src": "683:8",
+            "src_char": "679:8"
+          },
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 21,
+            "src": "794:9",
+            "src_char": "790:9"
+          }
+        ]
+      },
+      {
+        "title": "Unspecific Solidity Pragma",
+        "description": "Consider using a specific version of Solidity in your contracts instead of a wide version. For example, instead of `pragma solidity ^0.8.0;`, use `pragma solidity 0.8.0;`",
+        "detector_name": "unspecific-solidity-pragma",
+        "instances": [
+          {
+            "contract_path": "contracts/AgentIdRegistryMock.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          },
+          {
+            "contract_path": "contracts/EoaTestCaller.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 2,
+            "src": "32:24",
+            "src_char": "32:24"
+          }
+        ]
+      },
+      {
+        "title": "Public Function Not Used Internally",
+        "description": "If a function is marked public but is not used internally, consider marking it as `external`.",
+        "detector_name": "unused-public-function",
+        "instances": [
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 96,
+            "src": "4445:15",
+            "src_char": "4441:15"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 108,
+            "src": "4760:8",
+            "src_char": "4756:8"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 112,
+            "src": "4861:8",
+            "src_char": "4857:8"
+          },
+          {
+            "contract_path": "contracts/LunaPhaseAgents.sol",
+            "line_no": 117,
+            "src": "5032:10",
+            "src_char": "5028:10"
+          }
+        ]
+      }
+    ]
+  },
+  "detectors_used": [
+    "abi-encode-packed-hash-collision",
+    "arbitrary-transfer-from",
+    "assert-state-change",
+    "block-timestamp-deadline",
+    "boolean-equality",
+    "builtin-symbol-shadowing",
+    "centralization-risk",
+    "constant-function-changes-state",
+    "constant-function-contains-assembly",
+    "contract-locks-ether",
+    "costly-loop",
+    "dangerous-unary-operator",
+    "dead-code",
+    "delegate-call-unchecked-address",
+    "delegatecall-in-loop",
+    "delete-nested-mapping",
+    "deprecated-oz-function",
+    "division-before-multiplication",
+    "dynamic-array-length-assignment",
+    "ecrecover",
+    "empty-block",
+    "empty-require-revert",
+    "enumerable-loop-removal",
+    "eth-send-unchecked-address",
+    "experimental-encoder",
+    "function-initializing-state",
+    "function-pointer-in-constructor",
+    "function-selector-collision",
+    "inconsistent-type-names",
+    "incorrect-caret-operator",
+    "incorrect-erc20-interface",
+    "incorrect-erc721-interface",
+    "incorrect-shift-order",
+    "incorrect-use-of-modifier",
+    "internal-function-used-once",
+    "large-numeric-literal",
+    "literal-instead-of-constant",
+    "local-variable-shadowing",
+    "missing-inheritance",
+    "misused-boolean",
+    "modifier-used-only-once",
+    "msg-value-in-loop",
+    "multiple-constructors",
+    "multiple-placeholders",
+    "nested-struct-in-mapping",
+    "non-reentrant-not-first",
+    "out-of-order-retryable",
+    "pre-declared-local-variable-usage",
+    "push-zero-opcode",
+    "redundant-statement",
+    "reentrancy-state-change",
+    "require-revert-in-loop",
+    "return-bomb",
+    "reused-contract-name",
+    "rtlo",
+    "selfdestruct",
+    "signed-integer-storage-array",
+    "solmate-safe-transfer-lib",
+    "state-change-without-event",
+    "state-no-address-check",
+    "state-variable-could-be-constant",
+    "state-variable-could-be-immutable",
+    "state-variable-init-order",
+    "state-variable-read-external",
+    "state-variable-shadowing",
+    "storage-array-length-not-cached",
+    "storage-array-memory-edit",
+    "strict-equality-contract-balance",
+    "tautological-compare",
+    "tautology-or-contradiction",
+    "todo",
+    "tx-origin-used-for-auth",
+    "unchecked-low-level-call",
+    "unchecked-return",
+    "unchecked-send",
+    "uninitialized-local-variable",
+    "unprotected-initializer",
+    "unsafe-casting",
+    "unsafe-erc20-operation",
+    "unsafe-oz-erc721-mint",
+    "unspecific-solidity-pragma",
+    "unused-error",
+    "unused-import",
+    "unused-public-function",
+    "unused-state-variable",
+    "void-constructor",
+    "weak-randomness",
+    "yul-return"
+  ]
+}

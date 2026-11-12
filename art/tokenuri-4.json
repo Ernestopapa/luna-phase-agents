@@ -1,0 +1,23 @@
+{
+  "name": "Luna Phase Agents #4",
+  "description": "Luna Phase Agents (LPHASE) - 7,777 moon-phase Agents on BNB Smart Chain. First 3 per wallet free for Binance Agent ID holders, every extra 0.00005 BNB. On-chain SVG art, 8 moon phases. Not audited by a third party. No floor price, returns, token or airdrop promised.",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MDAnIGhlaWdodD0nNDAwJyB2aWV3Qm94PScwIDAgNDAwIDQwMCc+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSc0MDAnIGZpbGw9JyMwYTBlMWEnLz48Y2lyY2xlIGN4PSc2MCcgY3k9JzUwJyByPScyJyBmaWxsPScjZmZmZmZmJy8+PGNpcmNsZSBjeD0nMzMwJyBjeT0nNzAnIHI9JzInIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PSc5MCcgY3k9JzMyMCcgcj0nMicgZmlsbD0nI2ZmZmZmZicvPjxjaXJjbGUgY3g9JzM0MCcgY3k9JzMwMCcgcj0nMS41JyBmaWxsPScjZmZmZmZmJy8+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTgwJyByPScxMTAnIGZpbGw9JyNlOWU2ZDgnLz48Y2lyY2xlIGN4PSc1NScgY3k9JzE4MCcgcj0nMTEwJyBmaWxsPScjMGEwZTFhJy8+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTgwJyByPScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzNhNDY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PHRleHQgeD0nMjAwJyB5PSczNDAnIGZvbnQtZmFtaWx5PSdtb25vc3BhY2UnIGZvbnQtc2l6ZT0nMjInIGZpbGw9JyNlOWU2ZDgnIHRleHQtYW5jaG9yPSdtaWRkbGUnPldheGluZyBHaWJib3VzPC90ZXh0Pjx0ZXh0IHg9JzIwMCcgeT0nMzY4JyBmb250LWZhbWlseT0nbW9ub3NwYWNlJyBmb250LXNpemU9JzE0JyBmaWxsPScjOGE5NGI4JyB0ZXh0LWFuY2hvcj0nbWlkZGxlJz5MdW5hIFBoYXNlIEFnZW50cyAjNCAtIDc1JSBsaXQ8L3RleHQ+PC9zdmc+",
+  "attributes": [
+    {
+      "trait_type": "Phase",
+      "value": "Waxing Gibbous"
+    },
+    {
+      "trait_type": "Illumination",
+      "value": "75%"
+    },
+    {
+      "trait_type": "Phase Index",
+      "value": 3
+    },
+    {
+      "trait_type": "Origin",
+      "value": "Paid"
+    }
+  ]
+}

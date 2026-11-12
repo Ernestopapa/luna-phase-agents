@@ -1,0 +1,335 @@
+{
+  "network": "anvil-local (dry run)",
+  "startedAt": "2026-11-02T15:38:30.564Z",
+  "tests": [
+    {
+      "name": "mock registry deploys",
+      "ok": true,
+      "detail": "gas 308419"
+    },
+    {
+      "name": "LunaPhaseAgents deploys",
+      "ok": true,
+      "detail": "gas 2622738 (local addr 0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0)"
+    },
+    {
+      "name": "name/symbol",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "constants",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "totalSupply starts 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeRemaining 7000 / paidRemaining 777 at start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeOpen true at start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "paidOpen true at start (blended, no separate phase)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "owner is deployer (local; mainnet owner = user wallet)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "registry is mock",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ABI has NO setBaseURI (on-chain art is immutable)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ABI has NO freeMint (single blended mint only)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phaseOf/phaseName/illumination cycle 1..9",
+      "ok": true,
+      "detail": "1=New Moon 0%, 5=Full Moon 100%, 9=New Moon again"
+    },
+    {
+      "name": "quoteMint fresh wallet qty3 = 3 free, 0 paid, 0 BNB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "quoteMint fresh wallet qty5 = 3 free, 2 paid, 0.0001 BNB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "quoteMint fresh wallet qty1 = 1 free, 0 paid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "non-agent mint(1) reverts",
+      "ok": true,
+      "detail": "execution reverted: \"no Agent ID\""
+    },
+    {
+      "name": "non-agent mint(5) paid reverts",
+      "ok": true,
+      "detail": "execution reverted: \"no Agent ID\""
+    },
+    {
+      "name": "caller contract is an Agent ID holder in mock",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "contract caller mint reverts (EOA only)",
+      "ok": true,
+      "detail": "tryMint returned false (false = inner mint reverted)"
+    },
+    {
+      "name": "agent mint(3) free succeeds",
+      "ok": true,
+      "detail": "tokens #1-3, gas 215971"
+    },
+    {
+      "name": "freeClaimed=3 / mintedCount=3 after mint(3)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeMinted(address) true after a free mint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeMintedCount=3 / paidMinted=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenPaid #1-3 false (free)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "contract balance 0 after free-only mint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI(1) decodes: New Moon, 0%, Free",
+      "ok": true,
+      "detail": "phase=New Moon"
+    },
+    {
+      "name": "tokenURI(1) SVG is valid and names New Moon",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI(9999) reverts",
+      "ok": true,
+      "detail": "execution reverted: \"nonexistent token\""
+    },
+    {
+      "name": "agent2 mint(5) blended succeeds (3 free + 2 paid)",
+      "ok": true,
+      "detail": "tokens #4-8, gas 317875"
+    },
+    {
+      "name": "agent2 freeClaimed=3 / mintedCount=5 / paidMinted=2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenPaid #4-6 false, #7-8 true (free first, paid after)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "contract holds 0.0001 BNB after blended mint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI(5) = Full Moon, 100%, Free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI(8) = Waning Crescent, 25%, Paid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong-price mint reverts",
+      "ok": true,
+      "detail": "execution reverted: \"wrong price\""
+    },
+    {
+      "name": "overpay mint reverts",
+      "ok": true,
+      "detail": "execution reverted: \"wrong price\""
+    },
+    {
+      "name": "qty 0 reverts",
+      "ok": true,
+      "detail": "execution reverted: \"qty 1..50\""
+    },
+    {
+      "name": "qty 51 reverts",
+      "ok": true,
+      "detail": "execution reverted: \"qty 1..50\""
+    },
+    {
+      "name": "mint past 50/wallet reverts",
+      "ok": true,
+      "detail": "execution reverted: \"max 50 per wallet\""
+    },
+    {
+      "name": "agent2 mint(45) reaches exactly 50/wallet",
+      "ok": true,
+      "detail": "gas 2285660"
+    },
+    {
+      "name": "mint(1) at 50/wallet cap reverts",
+      "ok": true,
+      "detail": "execution reverted: \"max 50 per wallet\""
+    },
+    {
+      "name": "royaltyInfo 5% to owner",
+      "ok": true,
+      "detail": "receiver 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, amount 0.05 BNB on 1 BNB sale"
+    },
+    {
+      "name": "supportsInterface ERC2981",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "paid supply exhausts to 0 (777 paid)",
+      "ok": true,
+      "detail": "16 wallets, totalSupply 831"
+    },
+    {
+      "name": "paidOpen false after exhaustion, freeOpen still true",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh wallet mint(3) free still succeeds after paid exhaustion",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "paid mint after paid exhaustion reverts",
+      "ok": true,
+      "detail": "execution reverted: \"paid supply exhausted\""
+    },
+    {
+      "name": "quoteMint after paid exhaustion: 0 free, 1 paid, 0.00005 BNB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI #1-8 cover all 8 phases with matching SVG text",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "contract holds paid BNB 0.03885 (= 777 x 0.00005)",
+      "ok": true,
+      "detail": "0.03885 BNB"
+    },
+    {
+      "name": "withdraw tx succeeds",
+      "ok": true,
+      "detail": "gas 32159"
+    },
+    {
+      "name": "owner withdraw empties contract",
+      "ok": true,
+      "detail": "0.0 BNB left"
+    },
+    {
+      "name": "non-owner withdraw reverts",
+      "ok": true,
+      "detail": "execution reverted (unknown custom error)"
+    },
+    {
+      "name": "withdraw empty reverts",
+      "ok": true,
+      "detail": "execution reverted: \"nothing to withdraw\" (action=\"call\", data=\"0x08c379a00000000000000000000000000000000000000000000000"
+    }
+  ],
+  "deployment": {
+    "mockAddress": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+    "mockDeployGas": "308419",
+    "lunaAddress": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+    "lunaDeployGas": "2622738"
+  },
+  "freeMint": {
+    "tx": "0x66f36c93d6815b5db3cc0146766a9c1ee02bcbe9885623d71d950b262e277096",
+    "gas": "215971"
+  },
+  "blendedMint": {
+    "tx": "0x80c26bd1368f16cf793b1bbbba78514a24088324ccf655b73687270187b7204d",
+    "gas": "317875"
+  },
+  "maxWalletMint": {
+    "tx": "0x8f995799e7b9852fdc3b7c7f12e7e2cb44e2359c9dc132d0f1a3f5ba43fdb794",
+    "gas": "2285660"
+  },
+  "royalty": {
+    "receiver": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "amountWei": "50000000000000000"
+  },
+  "paidExhaustion": {
+    "walletsUsed": 16,
+    "seconds": "17",
+    "totalSupply": "831"
+  },
+  "withdraw": {
+    "tx": "0x36cf6b1b26d7678c363d8d8f7a3e4293cc1b3cacdd94c7051aeac8ddd63f9c56",
+    "gas": "32159",
+    "balanceAfter": "0"
+  },
+  "mainnetCostEstimate": {
+    "gasPriceAssumption": "0.05 gwei",
+    "bnbPriceAssumptionUsd": 700,
+    "lunaDeployGas": "2622738",
+    "lunaDeployBnb": "0.0001311369",
+    "lunaDeployUsd": "0.0918",
+    "freeMintX3Gas": "215971",
+    "freeMintX3Bnb": "0.00001079855",
+    "freeMintX3Usd": "0.0076",
+    "blendedMintX5Gas": "317875",
+    "blendedMintX5Bnb": "0.00001589375",
+    "blendedMintX5Usd": "0.0111",
+    "mintX45Gas": "2285660",
+    "mintX45Bnb": "0.000114283",
+    "mintX45Usd": "0.0800",
+    "withdrawGas": "32159",
+    "withdrawBnb": "0.00000160795",
+    "withdrawUsd": "0.0011",
+    "note": "Mock is local-only; mainnet uses the real registry, so mainnet deployment = LunaPhaseAgents deploy only. No setBaseURI tx exists (on-chain art)."
+  },
+  "finishedAt": "2026-11-02T15:38:58.729Z",
+  "allPassed": true
+}

@@ -1,0 +1,121 @@
+{
+  "network": "BSC testnet",
+  "chainId": 97,
+  "at": "2026-11-02T16:07:15.051Z",
+  "tests": [
+    {
+      "name": "name/symbol",
+      "ok": true,
+      "detail": "Luna Phase Agents / LPHASE"
+    },
+    {
+      "name": "constants + owner is user wallet",
+      "ok": true,
+      "detail": "owner 0x75d251Ba39dED2E456d9f6DD776f77d422864403"
+    },
+    {
+      "name": "totalSupply 0 / freeRemaining 7000 / paidRemaining 777",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeOpen true / paidOpen true at start (blended)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ABI has NO setBaseURI / NO freeMint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "agent mint(3) free succeeds",
+      "ok": true,
+      "detail": "tx 0xf0e95b59f404bcf48aec711b8d998969e876a7bd5548986ee3562d28d2777ec7 gas 215971 tokens #1-3"
+    },
+    {
+      "name": "non-agent mint(1) reverts",
+      "ok": true,
+      "detail": "execution reverted: \"no Agent ID\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000000000000"
+    },
+    {
+      "name": "contract caller mint reverts (EOA only)",
+      "ok": true,
+      "detail": "tryMint returned false (false = inner mint reverted)"
+    },
+    {
+      "name": "agent2 mint(5) blended succeeds (3 free + 2 paid)",
+      "ok": true,
+      "detail": "tx 0x52ce227b2cbd2e221339966f9d47bf2c416c49485edd2aaadeefe2121bde9b0e gas 317875 tokens #4-8"
+    },
+    {
+      "name": "tokenPaid #4-6 false, #7-8 true",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong-price mint reverts",
+      "ok": true,
+      "detail": "execution reverted: \"wrong price\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000000000000"
+    },
+    {
+      "name": "qty 51 reverts",
+      "ok": true,
+      "detail": "execution reverted: \"qty 1..50\" (action=\"estimateGas\", data=\"0x08c379a000000000000000000000000000000"
+    },
+    {
+      "name": "agent2 mint(45) reaches exactly 50/wallet",
+      "ok": true,
+      "detail": "tx 0x048dc20351e31844fd88d73c064940532f0e6629082a63093d7ec3e86f2f78c7 gas 2285660"
+    },
+    {
+      "name": "mint(1) at 50/wallet cap reverts",
+      "ok": true,
+      "detail": "execution reverted: \"max 50 per wallet\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000000"
+    },
+    {
+      "name": "quoteMint agent (free used) qty1 = 0 free, 1 paid, 0.00005",
+      "ok": true,
+      "detail": "free=0 paid=1 cost=0.00005 tBNB"
+    },
+    {
+      "name": "tokenURI(1) live: New Moon, 0%, Free, valid SVG",
+      "ok": true,
+      "detail": "phase=New Moon"
+    },
+    {
+      "name": "tokenURI(5) live: Full Moon, 100%, Free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tokenURI(8) live: Waning Crescent, 25%, Paid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "royaltyInfo 5% to owner (user wallet)",
+      "ok": true,
+      "detail": "receiver 0x75d251Ba39dED2E456d9f6DD776f77d422864403 amount 0.05 tBNB on 1 tBNB sale"
+    },
+    {
+      "name": "contract holds paid tBNB 0.00235 for owner",
+      "ok": true,
+      "detail": "0.00235 tBNB"
+    },
+    {
+      "name": "non-owner (deployer) withdraw reverts",
+      "ok": false,
+      "detail": "execution reverted (unknown custom error) (action=\"estimateGas\", data=\"0x118cdaa700000000000000000000000080422fef2ec4b85"
+    }
+  ],
+  "corrections": [
+    {
+      "test": "non-owner (deployer) withdraw reverts",
+      "issue": "Harness regex expected the string OwnableUnauthorizedAccount in e.message; ethers v6 reports custom errors as execution reverted (unknown custom error) with raw revert data.",
+      "proof": "withdraw.staticCall({from: deployer}) reverted with data 0x118cdaa700000000000000000000000080422fef2ec4b85f3d6a66a5f279e9901d5a91b9; keccak(OwnableUnauthorizedAccount(address))[:4] = 0x118cdaa7 and the 32-byte arg is exactly the deployer address. Same correction as AKEY testnet.",
+      "verdict": "Contract is correct (owner-only withdraw proven live). Effective live result: 21/21 passed."
+    }
+  ],
+  "effectiveResult": "21/21 passed after correction (20/21 as recorded by the harness, 1 regex miss)"
+}

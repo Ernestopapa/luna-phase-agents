@@ -1,0 +1,19 @@
+{
+  "author": "",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1",
+    "ethers": "^6.17.0",
+    "solc": "0.8.26"
+  },
+  "description": "Luna Phase Agents \u2014 Binance Agent ID moon-phase NFT mint: 7,777 total, first 7,000 free (3/wallet), 777 paid at 0.00005 BNB (~$0.035) each, single blended mint(qty), Agent ID only, EOA-only, on-chain SVG 8 phases.",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "luna-phase-agents",
+  "scripts": {
+    "compile": "node scripts/compile.mjs",
+    "test:local": "node scripts/local-test.mjs"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

@@ -1,0 +1,14 @@
+{
+  "address": "0x5c04392641c81F1b69826E13d8f3F78c58464970",
+  "chainId": 56,
+  "method": "Sourcify forwarding (guid ilvwfes7szp5e8ctt1f3ewym7a9yeehzgziq5yqs24tyvgbayj, checkverifystatus Pass - Verified); confirmed by getsourcecode chain 56",
+  "verified": true,
+  "ContractName": "LunaPhaseAgents",
+  "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+  "OptimizationUsed": "1",
+  "Runs": "200",
+  "EVMVersion": "cancun",
+  "ConstructorArguments": "00000000000000000000000060b9262456de011f7d15a54cdd8c48baaa8b022f00000000000000000000000075d251ba39ded2e456d9f6dd776f77d422864403",
+  "SourceCode_chars": 193257,
+  "contract_page": "https://bscscan.com/address/0x5c04392641c81F1b69826E13d8f3F78c58464970"
+}

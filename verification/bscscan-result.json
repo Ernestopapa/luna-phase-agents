@@ -1,0 +1,11 @@
+{
+  "address": "0x92788043466352c8b878601702DA549579657bd2",
+  "chainId": 97,
+  "method": "manual form via live browser (API key rejected for chain 97, Invalid API Key #err2, 4 attempts; Sourcify forwarding hit daily 500 limit)",
+  "verified": true,
+  "result_message": "Successfully generated matching Bytecode and ABI for Contract Address [0x92788043466352c8b878601702DA549579657bd2]",
+  "contract_page": "https://testnet.bscscan.com/address/0x92788043466352c8b878601702DA549579657bd2",
+  "page_shows": "Source Code Verified, Exact Match badge, Contract tab; CONTRACT NAME LunaPhaseAgents; COMPILER VERSION v0.8.26+commit.8a97fa7a; OPTIMIZATION ENABLED Yes with 200 runs; OTHER SETTINGS cancun EvmVersion; LICENSE MIT; decoded constructor args agentIdRegistry_ 0xef8E60dA7b5267a7df0116C4Eb9697ce9fCFA709, initialOwner 0x75d251Ba39dED2E456d9f6DD776f77d422864403",
+  "browser_task": "browser-task:8fdcbbaa-7bd4-5d2c-a7f6-25c3b85c3533, completed 2026-11-02 16:09-16:14 GMT; Cloudflare challenge cleared on second attempt after environment replacement; first submission succeeded, no correction needed; no sign-in, payment or wallet connection used",
+  "api_note": "BscScan v2 API getsourcecode chain 97 still returns Invalid API Key (#err2) after verification (re-checked 16:14 GMT); the live contract page is the evidence. Sourcify re-confirmed exact_match matchId 58098145."
+}
